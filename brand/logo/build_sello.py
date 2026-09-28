@@ -14,21 +14,27 @@ RING_TOP = "ABOGADOS & ASOCIADOS"
 RING_BOTTOM = "SINCÉ · SUCRE"
 
 
-def seal_cutouts(cx, cy, R, simple=False):
-    """Everything carved out of the disc, drawn in black for use inside a <mask>."""
+def seal_cutouts(cx, cy, R, simple=False, only=None):
+    """Everything carved out of the disc, drawn in black for use inside a <mask>.
+    only: None (all), "rings", "text" or "mono" — separate layers for animation."""
     k = "#000"
     sw = R * 0.014
-    parts = [
+    rings = [
         f'<circle cx="{cx}" cy="{cy}" r="{R*0.925:.2f}" fill="none" stroke="{k}" stroke-width="{sw:.2f}"/>',
         f'<circle cx="{cx}" cy="{cy}" r="{R*(0.64 if not simple else 0.80):.2f}" fill="none" stroke="{k}" stroke-width="{sw:.2f}"/>',
     ]
-    if not simple:
+    if only == "rings":
+        return "".join(rings)
+    parts = [] if only else rings
+    if not simple and only in (None, "text"):
         fs = R * 0.112
         r_top = R * 0.78 - fs * 0.36
         parts.append(ring_text(hanken5, RING_TOP, cx, cy, r_top, fs, 0.2, k, 0))
         parts.append(ring_text(hanken5, RING_BOTTOM, cx, cy, r_top + fs * 0.72, fs, 0.34, k, 180, bottom=True))
         for sx in (-1, 1):
             parts.append(f'<circle cx="{cx + sx*R*0.78:.2f}" cy="{cy:.2f}" r="{R*0.026:.2f}" fill="{k}"/>')
+    if only == "text":
+        return "".join(parts)
     size = R * (0.43 if not simple else 0.56)
     mono = "NAR"
     tracking = 0.015
@@ -98,6 +104,12 @@ def main():
         with open(os.path.join(OUT, name), "w") as fh:
             fh.write(content)
     print("\n".join(sorted(files)))
+    # Animation layers for the video: black shapes on transparent, R = 400.
+    layers = os.path.join(os.path.dirname(OUT), "..", "..", "video", "assets")
+    os.makedirs(layers, exist_ok=True)
+    for part in ("rings", "text", "mono"):
+        with open(os.path.join(layers, f"sello-{part}.svg"), "w") as fh:
+            fh.write(svg(800, 800, seal_cutouts(400, 400, 400, only=part)))
 
 
 if __name__ == "__main__":
