@@ -68,7 +68,7 @@ function serve() {
       "-y", "-loglevel", "error",
       "-f", "image2pipe", "-framerate", String(T.FPS), "-c:v", "mjpeg", "-i", "-",
       "-i", path.join(OUT, "musica.wav"),
-      "-c:v", "libx264", "-preset", "slow", "-crf", "17", "-pix_fmt", "yuv420p", "-r", String(T.FPS),
+      "-c:v", "libx264", "-preset", "slow", "-crf", "20", "-pix_fmt", "yuv420p", "-r", String(T.FPS),
       "-c:a", "aac", "-b:a", "256k", "-shortest", "-movflags", "+faststart", mp4,
     ], { stdio: ["pipe", "inherit", "inherit"] });
     const started = Date.now();
