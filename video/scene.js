@@ -486,23 +486,23 @@
       icon("arrow-right", bw / 2 - 78, 0, 44, C.card, prog(t, K.t.cta + 0.2, 0.4), 2);
       ctx.restore();
     }
-    // contact strip slides up; the one number rolls in digit by digit
+    // contact strip slides up; each number rolls in digit by digit
     const sp = outQuint(prog(t, K.t.phones - 0.15, 0.55));
     if (sp > 0) {
       ctx.save(); ctx.globalAlpha *= sp; ctx.translate(0, (1 - sp) * 220);
-      roundRect(90, 1372, W - 180, 216, 60, C.nogalSoft);
-      ctx.beginPath(); ctx.arc(206, 1480, 62, 0, Math.PI * 2); ctx.fillStyle = C.nogal; ctx.fill();
-      icon("phone", 206, 1480, 56, C.card, prog(t, K.t.phones, 0.6), 1.8);
-      riseText("LLÁMANOS", 312, 1444, 24, F.sans(24, 600), C.inkMuted, prog(t, K.t.phones, 0.5), { align: "left", spacing: 7 });
-      letters(K.phones[0], 310, 1530, F.sans(76, 600), C.ink, t, K.t.phones + 0.1, { mode: "rise", stagger: 0.035, align: "left" });
+      roundRect(90, 1356, W - 180, 290, 60, C.nogalSoft);
+      ctx.beginPath(); ctx.arc(206, 1501, 62, 0, Math.PI * 2); ctx.fillStyle = C.nogal; ctx.fill();
+      icon("phone", 206, 1501, 56, C.card, prog(t, K.t.phones, 0.6), 1.8);
+      riseText("LLÁMANOS", 312, 1416, 22, F.sans(22, 600), C.inkMuted, prog(t, K.t.phones, 0.5), { align: "left", spacing: 7 });
+      K.phones.forEach((n, k) => letters(n, 310, 1482 + k * 62, F.sans(50, 600), C.ink, t, K.t.phones + 0.1 + k * 0.18, { mode: "rise", stagger: 0.025, align: "left" }));
       ctx.restore();
     }
     const ap = prog(t, K.t.address, 0.5);
-    if (ap > 0) { ctx.save(); ctx.globalAlpha *= clamp(ap * 2); icon("map-pin", 250, 1700, 38, C.nogal, ap, 1.8); ctx.restore(); }
-    riseText(K.address, 290, 1714, 36, F.sans(36, 500), C.inkMuted, ap, { align: "left" });
+    if (ap > 0) { ctx.save(); ctx.globalAlpha *= clamp(ap * 2); icon("map-pin", 250, 1722, 38, C.nogal, ap, 1.8); ctx.restore(); }
+    riseText(K.address, 290, 1736, 36, F.sans(36, 500), C.inkMuted, ap, { align: "left" });
     const hp = prog(t, K.t.handle, 0.5);
-    if (hp > 0) { ctx.save(); ctx.globalAlpha *= clamp(hp * 2); icon("message-circle", 250, 1782, 38, C.nogal, hp, 1.8); ctx.restore(); }
-    riseText(K.handle, 290, 1796, 36, F.sans(36, 500), C.inkMuted, hp, { align: "left" });
+    if (hp > 0) { ctx.save(); ctx.globalAlpha *= clamp(hp * 2); icon("message-circle", 250, 1796, 38, C.nogal, hp, 1.8); ctx.restore(); }
+    riseText(K.handle, 290, 1810, 36, F.sans(36, 500), C.inkMuted, hp, { align: "left" });
     ctx.restore();
   }
 

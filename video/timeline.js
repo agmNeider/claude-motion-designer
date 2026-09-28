@@ -92,7 +92,7 @@
   ];
 
   var contact = {
-    phones: ["304 382 3713"],
+    phones: ["304 382 3713", "313 699 4178", "301 466 6391"],
     address: "Sincé, Sucre · frente al D1",
     handle: "@nar.abogadosyasociados",
     cta: "Agenda tu consulta",
