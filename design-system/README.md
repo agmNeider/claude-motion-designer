@@ -9,6 +9,7 @@ Lema: *Tu tranquilidad, nuestra prioridad.*
 - Cierra con una frase firme y una acción: "No es un favor. Es una obligación legal." / "Cada caso es diferente." y luego el contacto.
 - Nombra la norma cuando la hay, en estilo `radicado`: "Art. 154 C.C.", "Ley 25 de 1992". No cites una norma que el equipo no haya verificado.
 - Términos del oficio tal cual: cuota alimentaria, comparendo, derecho de petición, tutela, certificado de libertad y tradición, RUNT, REDAM, sociedad conyugal.
+- Teléfonos, siempre con espacios y en este orden: 313 699 4178 · 304 382 3723 · 304 382 3717 · 301 466 6391.
 - Emojis solo en el texto del caption (✨ ⚖️ 📍, máximo dos). En las piezas gráficas nunca: usa `Icon`.
 - Mayúsculas espaciadas (`label`) solo para antetítulos y "ABOGADOS & ASOCIADOS". Los títulos van en tipo oración.
 
@@ -72,6 +73,10 @@ Diferenciales que la firma declara: asesoría personalizada (`shield-check`), ge
 
 ## Logotipo
 
-- Usa los archivos del grupo Logotipo; no redibujes ni recompongas "N.A.R.". `nar-wordmark-nogal.png` va sobre fondos claros y `nar-wordmark-marfil.png` sobre `espresso` o fotografía oscura.
-- Área de respeto: la altura del punto de "N.A.R." por cada lado. Ancho mínimo: 120px en pantalla.
-- Los archivos actuales vienen de un post (636×240 px). Para impresión o video 4K se necesita el archivo vectorial original.
+- El logotipo es **El Sello**: un sello notarial en `nogal` con el monograma NAR en Libre Caslon Display, "ABOGADOS & ASOCIADOS" y "SINCÉ · SUCRE" en el anillo. Las letras y los anillos son calados: a través de ellos se ve el fondo, así que el sello funciona sobre cualquier superficie o fotografía.
+- `nar-sello-nogal.svg` va sobre `surface`, `surface-raised` y blanco. `nar-sello-marfil.svg` va sobre `espresso` y sobre fotografía oscurecida. `nar-sello-espresso.svg` es la versión a una tinta para documentos, facturas e impresión en negro.
+- Por debajo de 64px usa `nar-sello-simple-nogal.svg` (sin texto en el anillo). El sello completo nunca va por debajo de 64px.
+- `nar-horizontal-claro.svg` y `nar-horizontal-oscuro.svg` combinan el sello, "N.A.R.", el descriptor y el lema para cabeceras, firmas de correo y el cierre de videos.
+- `nar-perfil-instagram.png` (1080×1080) es la foto de perfil. Instagram la recorta en círculo y el sello llena el cuadro.
+- Área de respeto: un cuarto del radio del sello por cada lado. No rotes el sello, no cambies el texto del anillo, no lo pongas sobre `nogal` ni lo encierres en otra forma.
+- En movimiento, el sello se "estampa": entra a 110% de escala con fundido y asienta a 100% en un tiempo fuerte (300 ms, `cubic-bezier(0.22, 1, 0.36, 1)`), y luego el texto del anillo gira 12° hasta su posición.

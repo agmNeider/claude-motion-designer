@@ -27,27 +27,62 @@
       "name": "Logos",
       "tile": "l",
       "order": [
-        "nar-wordmark-nogal.png",
-        "nar-wordmark-marfil.png",
-        "nar-wordmark-original.png"
+        "nar-sello-nogal.svg",
+        "nar-sello-marfil.svg",
+        "nar-sello-espresso.svg",
+        "nar-sello-simple-nogal.svg",
+        "nar-horizontal-claro.svg",
+        "nar-horizontal-oscuro.svg",
+        "nar-horizontal-claro.png",
+        "nar-perfil-instagram.png"
       ],
       "files": {
-        "nar-wordmark-nogal.png": {
-          "name": "nar-wordmark-nogal.png",
-          "blob": "469a9755078e517a662d69de4a118d38",
-          "size": 38450,
+        "nar-sello-nogal.svg": {
+          "name": "nar-sello-nogal.svg",
+          "blob": "dd8f3d34c43c395aa0e5e7f939d6d463",
+          "size": 44379,
+          "type": "image/svg+xml"
+        },
+        "nar-sello-marfil.svg": {
+          "name": "nar-sello-marfil.svg",
+          "blob": "d571e5d119710a91bf5446282078bc85",
+          "size": 44379,
+          "type": "image/svg+xml"
+        },
+        "nar-sello-espresso.svg": {
+          "name": "nar-sello-espresso.svg",
+          "blob": "4fc089f5163a8ed3de5bed8d3765313f",
+          "size": 44379,
+          "type": "image/svg+xml"
+        },
+        "nar-sello-simple-nogal.svg": {
+          "name": "nar-sello-simple-nogal.svg",
+          "blob": "df224557a58db611d6d2309125f0e1c5",
+          "size": 3666,
+          "type": "image/svg+xml"
+        },
+        "nar-horizontal-claro.svg": {
+          "name": "nar-horizontal-claro.svg",
+          "blob": "4c98ed43d2c2d8f261c4b8c842b42587",
+          "size": 110489,
+          "type": "image/svg+xml"
+        },
+        "nar-horizontal-oscuro.svg": {
+          "name": "nar-horizontal-oscuro.svg",
+          "blob": "2ae460ed30556566146d3e7306bf27d9",
+          "size": 110489,
+          "type": "image/svg+xml"
+        },
+        "nar-horizontal-claro.png": {
+          "name": "nar-horizontal-claro.png",
+          "blob": "1b52ba8351fad91780fcfc7193a0a407",
+          "size": 150697,
           "type": "image/png"
         },
-        "nar-wordmark-marfil.png": {
-          "name": "nar-wordmark-marfil.png",
-          "blob": "daa45ae6ab75fd08a8e1324b72a77d1d",
-          "size": 38240,
-          "type": "image/png"
-        },
-        "nar-wordmark-original.png": {
-          "name": "nar-wordmark-original.png",
-          "blob": "dfc9b62b044bbc5dc0717bb54a60f687",
-          "size": 102046,
+        "nar-perfil-instagram.png": {
+          "name": "nar-perfil-instagram.png",
+          "blob": "8e6b4bf44d3c383c1e19203f8999cb46",
+          "size": 128952,
           "type": "image/png"
         }
       }
@@ -173,8 +208,8 @@
   },
   "lastChange": {
     "by": "Neider Arroyo",
-    "at": "2026-09-28T00:45:14Z",
+    "at": "2026-09-28T01:00:50Z",
     "via": "Claude Code",
-    "note": "Sistema inicial: color primario nogal tomado del logotipo en Instagram; paleta, tipografía, 7 componentes y portada."
+    "note": "Nuevo logotipo El Sello (reemplaza el recorte del post); portada con motivo de sello; cuatro teléfonos de contacto."
   }
 }
