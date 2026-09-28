@@ -570,6 +570,18 @@
     else seg.draw(t);
     ctx.restore();
 
+    // lower third: the three numbers ride along the bottom during the drop and the values
+    const LT = T.contact.lowerThird, lin = outQuint(prog(t, LT.start, 0.6)), lout = inCubic(prog(t, LT.end - 0.45, 0.45));
+    if (lin > 0 && lout < 1) {
+      const font = F.sans(34, 600), str = T.contact.phones.join("   ·   "), tw = measure(str, font), bw = tw + 150, bh = 96;
+      const y = 1770 + (1 - lin) * 220 + lout * 220;
+      ctx.save(); ctx.globalAlpha = Math.min(lin, 1 - lout);
+      roundRect(W / 2 - bw / 2, y - bh / 2, bw, bh, bh / 2, "rgba(58,42,32,0.92)");
+      ctx.strokeStyle = C.laton; ctx.lineWidth = 2; ctx.beginPath(); ctx.roundRect(W / 2 - bw / 2, y - bh / 2, bw, bh, bh / 2); ctx.stroke();
+      icon("phone", W / 2 - bw / 2 + 58, y, 36, C.latonLight, prog(t, LT.start + 0.2, 0.5), 1.8);
+      text(str, W / 2 + 36, y + 12, font, C.marfil);
+      ctx.restore();
+    }
     // flashes
     for (const h of T.hits.concat(T.slams)) {
       const d = t - h, amp = T.hits.indexOf(h) >= 0 ? 0.55 : 0.18;

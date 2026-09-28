@@ -96,6 +96,8 @@
     address: "Sincé, Sucre · frente al D1",
     handle: "@nar.abogadosyasociados",
     cta: "Agenda tu consulta",
+    // lower third with the numbers during the drop and the values (bars 12–14)
+    lowerThird: { start: bar(12, 0.6), end: bar(14, 3.4) },
     t: { logo: bar(17), cta: bar(18), phones: bar(18, 1), address: bar(18, 3), handle: bar(19), final: bar(19), fade: bar(19, 3) },
   };
 
