@@ -9,7 +9,7 @@ Lema: *Tu tranquilidad, nuestra prioridad.*
 - Cierra con una frase firme y una acción: "No es un favor. Es una obligación legal." / "Cada caso es diferente." y luego el contacto.
 - Nombra la norma cuando la hay, en estilo `radicado`: "Art. 154 C.C.", "Ley 25 de 1992". No cites una norma que el equipo no haya verificado.
 - Términos del oficio tal cual: cuota alimentaria, comparendo, derecho de petición, tutela, certificado de libertad y tradición, RUNT, REDAM, sociedad conyugal.
-- Teléfonos, siempre con espacios y en este orden: 313 699 4178 · 304 382 3723 · 304 382 3717 · 301 466 6391.
+- Teléfono único de la firma: 304 382 3713, siempre con espacios. No publiques otros números.
 - Emojis solo en el texto del caption (✨ ⚖️ 📍, máximo dos). En las piezas gráficas nunca: usa `Icon`.
 - Mayúsculas espaciadas (`label`) solo para antetítulos y "ABOGADOS & ASOCIADOS". Los títulos van en tipo oración.
 

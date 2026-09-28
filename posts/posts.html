@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>N.A.R. — posts de Instagram</title>
+<style>
+  @font-face { font-family: "Caslon Display"; src: url(../design-system/fonts/LibreCaslonDisplay-Regular.woff2) format("woff2"); }
+  @font-face { font-family: "Caslon Text"; font-style: italic; src: url(../design-system/fonts/LibreCaslonText-Italic.woff2) format("woff2"); }
+  @font-face { font-family: "Hanken"; font-weight: 100 900; src: url(../design-system/fonts/HankenGrotesk-Variable.woff2) format("woff2"); }
+  @font-face { font-family: "Plex Mono"; font-weight: 500; src: url(../design-system/fonts/IBMPlexMono-Medium.woff2) format("woff2"); }
+
+  :root {
+    --espresso: #231915; --marfil: #f1eae1; --lino: #f3eee7; --card: #fbf8f4;
+    --nogal: #75533c; --nogal-dark: #c9a184; --nogal-strong: #4e3627; --nogal-soft: #e8dccf;
+    --laton: #a8834b; --laton-light: #cfae72; --ink: #241a15; --ink-muted: #65564b; --muted-dark: #b8a99b;
+    --display: "Caslon Display", Georgia, serif; --serif: "Caslon Text", Georgia, serif;
+    --sans: "Hanken", "Helvetica Neue", Arial, sans-serif; --mono: "Plex Mono", ui-monospace, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #888; display: flex; flex-wrap: wrap; gap: 40px; padding: 40px; font-family: var(--sans); }
+  .post { position: relative; width: 1080px; height: 1350px; overflow: hidden; flex: none; }
+  .post::after { /* film grain */
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .09; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .dark { background: radial-gradient(900px 700px at 25% 18%, rgba(201,161,132,.22), transparent 70%), radial-gradient(1200px 900px at 50% 60%, #2a1f1a, #1a1411); color: var(--marfil); }
+  .light { background: radial-gradient(1000px 800px at 50% 25%, #fbf8f4, #ece2d6); color: var(--ink); }
+  .brand { background: radial-gradient(900px 800px at 30% 20%, #86624a, var(--nogal) 60%, #664833); color: var(--marfil); }
+
+  .eyebrow { font: 600 24px/1 var(--sans); letter-spacing: .3em; text-transform: uppercase; }
+  .foot { position: absolute; left: 72px; right: 72px; bottom: 56px; display: flex; align-items: center; justify-content: space-between; font: 500 24px/1 var(--sans); }
+  .foot .who { display: flex; align-items: center; gap: 16px; }
+  .foot img { width: 56px; height: 56px; }
+  .foot .where { letter-spacing: .12em; text-transform: uppercase; font-size: 20px; font-weight: 600; }
+  i[data-icon] { display: inline-grid; place-items: center; font-style: normal; }
+  i[data-icon] svg { width: 100%; height: 100%; }
+
+  /* 1 · Todas las ramas */
+  #p1 .rings { position: absolute; right: -470px; top: 40px; width: 900px; height: 900px; }
+  #p1 .top { position: absolute; left: 80px; top: 88px; color: var(--laton-light); }
+  #p1 h1 { position: absolute; left: 76px; top: 170px; margin: 0; font: 400 136px/.98 var(--display); letter-spacing: -.01em; }
+  #p1 h1 em { font: italic 400 128px/1 var(--serif); color: var(--laton-light); }
+  #p1 .lead { position: absolute; left: 80px; top: 486px; width: 640px; margin: 0; font: 400 34px/1.45 var(--sans); color: var(--muted-dark); }
+  #p1 ul { position: absolute; left: 80px; top: 640px; width: 900px; margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 26px 40px; }
+  #p1 li { font: 500 38px/1 var(--sans); display: flex; align-items: center; gap: 20px; }
+  #p1 li::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--laton-light); flex: none; }
+  #p1 .more { position: absolute; left: 80px; top: 1080px; font: italic 400 46px/1 var(--serif); color: var(--nogal-dark); }
+  #p1 .foot { color: var(--marfil); }
+
+  /* 2 · Tutela 10 días */
+  #p2 .tag { position: absolute; left: 80px; top: 92px; display: inline-flex; align-items: center; gap: 14px; padding: 16px 28px; border-radius: 999px; background: var(--nogal-soft); color: var(--nogal-strong); }
+  #p2 .tag i { width: 34px; height: 34px; color: var(--nogal); }
+  #p2 .num { position: absolute; left: 50px; top: 150px; font: 400 640px/1 var(--display); color: var(--nogal); letter-spacing: -.04em; }
+  #p2 .dias { position: absolute; left: 640px; top: 470px; font: italic 400 150px/1 var(--serif); color: var(--laton); }
+  #p2 .rule { position: absolute; left: 80px; top: 800px; width: 180px; height: 3px; background: var(--laton); }
+  #p2 p.what { position: absolute; left: 80px; top: 840px; width: 880px; margin: 0; font: 400 50px/1.25 var(--display); color: var(--ink); }
+  #p2 .cite { position: absolute; left: 80px; top: 1010px; font: 500 26px/1 var(--mono); color: var(--nogal); letter-spacing: .02em; }
+  #p2 .help { position: absolute; left: 80px; top: 1080px; width: 860px; margin: 0; font: 400 30px/1.45 var(--sans); color: var(--ink-muted); }
+  #p2 .foot { color: var(--ink); }
+
+  /* 3 · Derecho de petición (card) */
+  #p3 .card { position: absolute; left: 64px; right: 64px; top: 64px; bottom: 150px; border-radius: 64px; background: var(--card); color: var(--ink); padding: 80px 76px; box-shadow: 0 30px 80px rgba(0,0,0,.45); }
+  #p3 .eyebrow { color: var(--ink-muted); }
+  #p3 h2 { margin: 26px 0 0; font: 400 104px/1 var(--display); }
+  #p3 h2 em { display: block; margin-top: 10px; font: italic 400 70px/1.1 var(--serif); color: var(--nogal); }
+  #p3 ol { margin: 64px 0 0; padding: 0; list-style: none; display: grid; gap: 40px; }
+  #p3 li { display: grid; grid-template-columns: 110px 1fr; align-items: baseline; }
+  #p3 li b { font: 400 76px/1 var(--display); color: var(--laton); }
+  #p3 li span { font: 400 38px/1.35 var(--sans); }
+  #p3 li strong { font-weight: 700; color: var(--nogal-strong); }
+  #p3 .cite { position: absolute; left: 76px; bottom: 70px; font: 500 24px/1 var(--mono); color: var(--nogal); }
+  #p3 .next { position: absolute; right: 76px; bottom: 58px; width: 56px; height: 56px; color: var(--ink); }
+  #p3 .foot { color: var(--marfil); }
+
+  /* 4 · Cita cuota alimentaria */
+  #p4 .quote { position: absolute; left: 60px; top: 90px; font: 400 520px/1 var(--display); color: var(--laton-light); opacity: .35; }
+  #p4 .top { position: absolute; left: 80px; top: 92px; color: var(--nogal-soft); }
+  #p4 h2 { position: absolute; left: 80px; top: 360px; width: 920px; margin: 0; font: 400 132px/1 var(--display); }
+  #p4 h2 em { display: block; margin-top: 18px; font: italic 400 112px/1.05 var(--serif); color: var(--nogal-soft); }
+  #p4 .rule { position: absolute; left: 80px; top: 790px; width: 180px; height: 3px; background: var(--laton-light); }
+  #p4 .cite { position: absolute; left: 80px; top: 830px; font: 500 26px/1.4 var(--mono); color: var(--marfil); opacity: .9; }
+  #p4 p.help { position: absolute; left: 80px; top: 930px; width: 860px; margin: 0; font: 400 36px/1.45 var(--sans); color: var(--marfil); }
+  #p4 .foot { color: var(--marfil); }
+
+  /* 5 · Agenda tu consulta */
+  #p5 .seal { position: absolute; left: 50%; top: 96px; width: 400px; height: 400px; transform: translateX(-50%); }
+  #p5 h2 { position: absolute; left: 0; right: 0; top: 560px; margin: 0; text-align: center; font: 400 112px/1 var(--display); }
+  #p5 .sub { position: absolute; left: 0; right: 0; top: 690px; text-align: center; font: italic 400 44px/1 var(--serif); color: var(--nogal); }
+  #p5 .phone { position: absolute; left: 110px; right: 110px; top: 786px; height: 170px; border-radius: 999px; background: var(--nogal); color: var(--card); display: flex; align-items: center; gap: 34px; padding: 0 40px; }
+  #p5 .phone i { width: 110px; height: 110px; border-radius: 50%; background: var(--card); color: var(--nogal); padding: 26px; flex: none; }
+  #p5 .phone small { display: block; font: 600 22px/1 var(--sans); letter-spacing: .28em; opacity: .85; margin-bottom: 10px; }
+  #p5 .phone span { font: 600 76px/1 var(--sans); font-variant-numeric: tabular-nums; }
+  #p5 .where { position: absolute; left: 0; right: 0; top: 1000px; display: flex; justify-content: center; align-items: center; gap: 12px; font: 500 34px/1 var(--sans); color: var(--ink-muted); }
+  #p5 .where i { width: 38px; height: 38px; color: var(--nogal); }
+  #p5 .chips { position: absolute; left: 90px; right: 90px; top: 1080px; display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; }
+  #p5 .chips span { padding: 12px 24px; border-radius: 999px; background: var(--nogal-soft); color: var(--nogal-strong); font: 600 24px/1 var(--sans); letter-spacing: .06em; text-transform: uppercase; }
+  #p5 .foot { color: var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- 1 · Presentación: todas las ramas -->
+<section class="post dark" id="p1">
+  <svg class="rings" viewBox="0 0 900 900" aria-hidden="true">
+    <circle cx="450" cy="450" r="440" fill="none" stroke="#cfae72" stroke-opacity=".28" stroke-width="2"/>
+    <circle cx="450" cy="450" r="360" fill="none" stroke="#cfae72" stroke-opacity=".22" stroke-width="2" stroke-dasharray="14 12"/>
+    <circle cx="450" cy="450" r="250" fill="none" stroke="#cfae72" stroke-opacity=".16" stroke-width="2"/>
+  </svg>
+  <div class="eyebrow top">N.A.R. Abogados &amp; Asociados</div>
+  <h1>Todas las ramas<br><em>del derecho.</em></h1>
+  <p class="lead">Un solo equipo para tu caso, sea cual sea.</p>
+  <ul>
+    <li>Civil</li><li>Penal</li><li>Familia</li><li>Laboral</li><li>Administrativo</li><li>Comercial</li>
+    <li>Constitucional</li><li>Tránsito</li><li>Seguridad social</li><li>Agrario</li><li>Notarial</li><li>Disciplinario</li>
+  </ul>
+  <div class="more">…y mucho más.</div>
+  <div class="foot"><div class="who"><img src="../brand/logo/final/nar-sello-simple-marfil.svg" alt="">@nar.abogadosyasociados</div><div class="where">Sincé, Sucre</div></div>
+</section>
+
+<!-- 2 · Dato: tutela en 10 días -->
+<section class="post light" id="p2">
+  <div class="tag eyebrow"><i data-icon="shield-check"></i>Acción de tutela</div>
+  <div class="num">10</div>
+  <div class="dias">días</div>
+  <div class="rule"></div>
+  <p class="what">es el plazo que tiene un juez para decidir tu acción de tutela.</p>
+  <div class="cite">Decreto 2591 de 1991 · art. 29</div>
+  <p class="help">¿Te niegan un servicio de salud, una pensión o la respuesta a una petición? Protegemos tus derechos fundamentales.</p>
+  <div class="foot"><div class="who"><img src="../brand/logo/final/nar-sello-simple-nogal.svg" alt="">@nar.abogadosyasociados</div><div class="where">Sincé, Sucre</div></div>
+</section>
+
+<!-- 3 · Educativo: derecho de petición -->
+<section class="post dark" id="p3">
+  <div class="card">
+    <div class="eyebrow">¿Sabías que…?</div>
+    <h2>El derecho de petición <em>tiene plazo de respuesta</em></h2>
+    <ol>
+      <li><b>1</b><span>Escribes tu solicitud, clara y respetuosa.</span></li>
+      <li><b>2</b><span>La radicas ante la entidad pública o la empresa.</span></li>
+      <li><b>3</b><span>Deben responderte de fondo en <strong>15 días hábiles</strong>.</span></li>
+    </ol>
+    <div class="cite">Ley 1755 de 2015 · art. 14</div>
+    <i class="next" data-icon="arrow-right"></i>
+  </div>
+  <div class="foot"><div class="who"><img src="../brand/logo/final/nar-sello-simple-marfil.svg" alt="">@nar.abogadosyasociados</div><div class="where">Te ayudamos a redactarlo</div></div>
+</section>
+
+<!-- 4 · Frase: cuota alimentaria -->
+<section class="post brand" id="p4">
+  <div class="quote" aria-hidden="true">“</div>
+  <div class="eyebrow top">Cuota alimentaria</div>
+  <h2>No es un favor. <em>Es una obligación legal.</em></h2>
+  <div class="rule"></div>
+  <div class="cite">Art. 411 · Código Civil<br>Alimentos a los hijos</div>
+  <p class="help">Te acompañamos para fijar, aumentar o cobrar la cuota alimentaria de tus hijos.</p>
+  <div class="foot"><div class="who"><img src="../brand/logo/final/nar-sello-simple-marfil.svg" alt="">@nar.abogadosyasociados</div><div class="where">Sincé, Sucre</div></div>
+</section>
+
+<!-- 5 · Llamado a la acción -->
+<section class="post light" id="p5">
+  <img class="seal" src="../brand/logo/final/nar-sello-nogal.svg" alt="N.A.R. Abogados & Asociados">
+  <h2>Agenda tu consulta</h2>
+  <div class="sub">Tu tranquilidad, nuestra prioridad</div>
+  <div class="phone"><i data-icon="phone"></i><div><small>LLÁMANOS</small><span>304 382 3713</span></div></div>
+  <div class="where"><i data-icon="map-pin"></i>Sincé, Sucre · frente al D1</div>
+  <div class="chips"><span>Demandas</span><span>Tutelas</span><span>Contratos</span><span>Divorcios</span><span>Sucesiones</span><span>Pensiones</span><span>Tránsito</span></div>
+  <div class="foot"><div class="who"><img src="../brand/logo/final/nar-sello-simple-nogal.svg" alt="">@nar.abogadosyasociados</div><div class="where">Todas las ramas del derecho</div></div>
+</section>
+
+<script>
+  // Inline the Lucide icons (shared with the video) so they inherit `color`.
+  window.POSTS_READY = fetch("../video/assets/icons.json").then((r) => r.json()).then((icons) => {
+    document.querySelectorAll("i[data-icon]").forEach((el) => {
+      const els = icons[el.dataset.icon] || [];
+      const inner = els.map(([tag, a]) => `<${tag} ${Object.entries(a).map(([k, v]) => `${k}="${v}"`).join(" ")}/>`).join("");
+      el.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+    });
+    return document.fonts.ready;
+  });
+</script>
+</body>
+</html>

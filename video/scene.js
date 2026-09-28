@@ -486,17 +486,15 @@
       icon("arrow-right", bw / 2 - 78, 0, 44, C.card, prog(t, K.t.cta + 0.2, 0.4), 2);
       ctx.restore();
     }
-    // contact strip slides up; numbers roll in like the branch slot
+    // contact strip slides up; the one number rolls in digit by digit
     const sp = outQuint(prog(t, K.t.phones - 0.15, 0.55));
     if (sp > 0) {
       ctx.save(); ctx.globalAlpha *= sp; ctx.translate(0, (1 - sp) * 220);
-      roundRect(90, 1370, W - 180, 250, 60, C.nogalSoft);
-      ctx.beginPath(); ctx.arc(190, 1495, 54, 0, Math.PI * 2); ctx.fillStyle = C.nogal; ctx.fill();
-      icon("phone", 190, 1495, 50, C.card, prog(t, K.t.phones, 0.6), 1.8);
-      K.phones.forEach((n, k) => {
-        const col = k % 2, row = Math.floor(k / 2);
-        riseText(n, 300 + col * 340, 1470 + row * 80, 44, F.sans(44, 600), C.ink, prog(t, K.t.phones + 0.1 + k * 0.1, 0.5), { align: "left" });
-      });
+      roundRect(90, 1372, W - 180, 216, 60, C.nogalSoft);
+      ctx.beginPath(); ctx.arc(206, 1480, 62, 0, Math.PI * 2); ctx.fillStyle = C.nogal; ctx.fill();
+      icon("phone", 206, 1480, 56, C.card, prog(t, K.t.phones, 0.6), 1.8);
+      riseText("LLÁMANOS", 312, 1444, 24, F.sans(24, 600), C.inkMuted, prog(t, K.t.phones, 0.5), { align: "left", spacing: 7 });
+      letters(K.phones[0], 310, 1530, F.sans(76, 600), C.ink, t, K.t.phones + 0.1, { mode: "rise", stagger: 0.035, align: "left" });
       ctx.restore();
     }
     const ap = prog(t, K.t.address, 0.5);
