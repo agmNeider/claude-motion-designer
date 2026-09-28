@@ -1,0 +1,12 @@
+<!-- @dsCard group="Piezas" height=560 -->
+<!doctype html>
+<html><head><meta charset="utf-8"><title>CarouselSlide</title></head>
+<body><div id="root" class="nar-row" style="align-items: start"></div>
+<script>
+  var N = window.NAR, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+    h('div', { style: { width: 380 } }, h(N.CarouselSlide, { eyebrow: '¿Quién debe pagar la pensión de alimentos?', title: '¿Tu hijo tiene derecho a recibir alimentos?' },
+      h('p', null, 'En Colombia, los padres tienen la obligación de contribuir a la manutención de sus hijos.'))),
+    h('div', { style: { width: 380 } }, h(N.CarouselSlide, { eyebrow: 'Cada caso es diferente', title: 'Escríbenos y te asesoramos', tone: 'dark', next: false },
+      h('p', null, '313 699 4178 · Sincé, Sucre, frente al D1.')))));
+</script></body></html>

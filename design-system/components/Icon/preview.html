@@ -1,0 +1,10 @@
+<!-- @dsCard group="Contenido" height=96 -->
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Icon</title></head>
+<body><div id="root" class="nar-row" style="color: var(--nogal)"></div>
+<script>
+  var N = window.NAR, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+    ['users', 'car', 'file-text', 'file-badge', 'scale'].map(function (n) { return h('span', { key: n, className: 'nar-disc' }, h(N.Icon, { name: n, size: 26 })); }),
+    N.Icon.names.filter(function (n) { return ['users', 'car', 'file-text', 'file-badge', 'scale'].indexOf(n) < 0; }).map(function (n) { return h(N.Icon, { key: n, name: n, size: 24 }); })));
+</script></body></html>

@@ -1,0 +1,48 @@
+<!-- @dsCard height=336 -->
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Cover</title>
+<style>
+  html, body { margin: 0; background: var(--surface); }
+  .cover { position: relative; width: 960px; height: 336px; overflow: hidden; background: var(--surface); }
+  .cover svg { position: absolute; left: 0; top: 0; }
+  .b-nogal { fill: var(--nogal); }
+  .b-ink { fill: var(--ink); }
+  .b-tinta { fill: var(--tinta); }
+  .b-laton { fill: var(--laton); }
+  .blk { rx: var(--radius-lg); }
+  .beam { stroke: var(--laton); stroke-width: 2; fill: none; }
+  .p-soft { fill: var(--nogal-soft); }
+  .p-laton { fill: var(--laton); }
+  .p-nogal { fill: var(--nogal); }
+  .name {
+    position: absolute; left: 48px; top: 152px; margin: 0; max-width: 864px;
+    font-family: var(--font-display); font-weight: 400; font-size: 64px; line-height: 0.95; color: var(--ink);
+  }
+  .tag {
+    position: absolute; left: 48px; top: 290px; margin: 0; max-width: 440px;
+    font-family: var(--font-serif); font-style: italic; font-size: 14px; line-height: 20px; color: var(--ink-muted);
+  }
+</style></head>
+<body>
+<div class="cover">
+  <svg width="960" height="336" viewBox="0 0 960 336" aria-hidden="true">
+    <!--
+      blocks: nogal 320×104, ink 256×104, tinta 160×104, laton 160×104 (bleeds right); gaps space-4 (16); corners radius-lg (28)
+      arrangement: top-band skeleton (name too wide for the 440px zone) — a strip of unequal bands, largest first, like a row of case folders
+      pattern: literal motif, the scale of justice — half-discs (pans) of radius-lg hanging from one laton hairline beam; chosen because the balanza is the firm's recurring image
+      scales: space-4 gaps, space-12 (48) inset, band 104 = space-16 + space-12 - 8 trim; pans r = radius-lg 28; beam = line weight 2px
+    -->
+    <rect class="blk b-nogal" x="48" y="24" width="320" height="104" />
+    <rect class="blk b-ink" x="384" y="24" width="256" height="104" />
+    <rect class="blk b-tinta" x="656" y="24" width="160" height="104" />
+    <rect class="blk b-laton" x="832" y="24" width="160" height="104" />
+    <line class="beam" x1="48" y1="52" x2="960" y2="52" />
+    <path class="p-soft" d="M180 52 A28 28 0 0 0 236 52 Z" />
+    <path class="p-laton" d="M484 52 A28 28 0 0 0 540 52 Z" />
+    <path class="p-soft" d="M708 52 A28 28 0 0 0 764 52 Z" />
+    <path class="p-nogal" d="M868 52 A28 28 0 0 0 924 52 Z" />
+  </svg>
+  <h1 class="name">N.A.R. Abogados<br>&amp; Asociados</h1>
+  <p class="tag">Tu tranquilidad, nuestra prioridad.</p>
+</div>
+</body></html>

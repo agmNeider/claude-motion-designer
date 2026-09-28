@@ -1,0 +1,10 @@
+<!-- @dsCard group="Contenido" height=170 -->
+<!doctype html>
+<html><head><meta charset="utf-8"><title>ContactCard</title></head>
+<body><div id="root" class="nar-stack"></div>
+<script>
+  var N = window.NAR, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    h(N.ContactCard, { phones: ['313 699 4178', '304 382 3723', '301 466 6391'],
+      address: 'Sincé, Sucre · frente al D1', handle: '@nar.abogadosyasociados' }));
+</script></body></html>

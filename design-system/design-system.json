@@ -1,0 +1,180 @@
+{
+  "v": 3,
+  "layout": "files",
+  "createdOnFiles": {
+    "v": 1,
+    "at": "2026-09-28T00:45:14Z"
+  },
+  "title": "N.A.R. Abogados & Asociados",
+  "namespace": "NAR",
+  "libraries": [
+    {
+      "name": "react",
+      "version": "18"
+    },
+    {
+      "name": "react-dom",
+      "version": "18"
+    }
+  ],
+  "sections": {},
+  "groups": [
+    "Logos",
+    "Icons"
+  ],
+  "assetGroups": {
+    "Logos": {
+      "name": "Logos",
+      "tile": "l",
+      "order": [
+        "nar-wordmark-nogal.png",
+        "nar-wordmark-marfil.png",
+        "nar-wordmark-original.png"
+      ],
+      "files": {
+        "nar-wordmark-nogal.png": {
+          "name": "nar-wordmark-nogal.png",
+          "blob": "469a9755078e517a662d69de4a118d38",
+          "size": 38450,
+          "type": "image/png"
+        },
+        "nar-wordmark-marfil.png": {
+          "name": "nar-wordmark-marfil.png",
+          "blob": "daa45ae6ab75fd08a8e1324b72a77d1d",
+          "size": 38240,
+          "type": "image/png"
+        },
+        "nar-wordmark-original.png": {
+          "name": "nar-wordmark-original.png",
+          "blob": "dfc9b62b044bbc5dc0717bb54a60f687",
+          "size": 102046,
+          "type": "image/png"
+        }
+      }
+    },
+    "Icons": {
+      "name": "Icons",
+      "tile": "xs",
+      "order": [
+        "scale.svg",
+        "users.svg",
+        "car.svg",
+        "file-text.svg",
+        "file-badge.svg",
+        "gavel.svg",
+        "landmark.svg",
+        "stamp.svg",
+        "shield-check.svg",
+        "handshake.svg",
+        "phone.svg",
+        "map-pin.svg",
+        "message-circle.svg",
+        "clock.svg",
+        "arrow-right.svg"
+      ],
+      "files": {
+        "scale.svg": {
+          "name": "scale.svg",
+          "blob": "f65a62bc805c112ed4d000f35acb3702",
+          "size": 461,
+          "type": "image/svg+xml"
+        },
+        "users.svg": {
+          "name": "users.svg",
+          "blob": "2ca745489b1e0ad99283cf76ceee42f1",
+          "size": 408,
+          "type": "image/svg+xml"
+        },
+        "car.svg": {
+          "name": "car.svg",
+          "blob": "f0d4486a46b4c69053187dbe782f5860",
+          "size": 513,
+          "type": "image/svg+xml"
+        },
+        "file-text.svg": {
+          "name": "file-text.svg",
+          "blob": "f5c1cde9e73fd38c35e06c77460d32d0",
+          "size": 426,
+          "type": "image/svg+xml"
+        },
+        "file-badge.svg": {
+          "name": "file-badge.svg",
+          "blob": "7692f205ef50c1c9e2046c2e8e519eb6",
+          "size": 433,
+          "type": "image/svg+xml"
+        },
+        "gavel.svg": {
+          "name": "gavel.svg",
+          "blob": "0161f81894dbff189cc4ad459b673b86",
+          "size": 394,
+          "type": "image/svg+xml"
+        },
+        "landmark.svg": {
+          "name": "landmark.svg",
+          "blob": "7b3c53865520b2947d63c1381566c9de",
+          "size": 498,
+          "type": "image/svg+xml"
+        },
+        "stamp.svg": {
+          "name": "stamp.svg",
+          "blob": "96303c109a36ad0775eb6a25d98a8bd0",
+          "size": 474,
+          "type": "image/svg+xml"
+        },
+        "shield-check.svg": {
+          "name": "shield-check.svg",
+          "blob": "d2e5ca91b84eaf80e332ea4323797400",
+          "size": 437,
+          "type": "image/svg+xml"
+        },
+        "handshake.svg": {
+          "name": "handshake.svg",
+          "blob": "2cd043651a595fc626cc4913a6e80f60",
+          "size": 539,
+          "type": "image/svg+xml"
+        },
+        "phone.svg": {
+          "name": "phone.svg",
+          "blob": "7039920032155075f25f60d06ed199f2",
+          "size": 519,
+          "type": "image/svg+xml"
+        },
+        "map-pin.svg": {
+          "name": "map-pin.svg",
+          "blob": "630a67d453c69e97eebdf0103af855b3",
+          "size": 378,
+          "type": "image/svg+xml"
+        },
+        "message-circle.svg": {
+          "name": "message-circle.svg",
+          "blob": "5b98bde7e7604959bd0ca6dcb3f42ce8",
+          "size": 273,
+          "type": "image/svg+xml"
+        },
+        "clock.svg": {
+          "name": "clock.svg",
+          "blob": "e3d7c22c5448f87d72e44faf61dcc3c3",
+          "size": 306,
+          "type": "image/svg+xml"
+        },
+        "arrow-right.svg": {
+          "name": "arrow-right.svg",
+          "blob": "af87a58f9d25ba3ea3498614fe4e2090",
+          "size": 282,
+          "type": "image/svg+xml"
+        }
+      }
+    }
+  },
+  "blobs": {},
+  "docs": {
+    "readme": "project/README.md",
+    "sections": []
+  },
+  "lastChange": {
+    "by": "Neider Arroyo",
+    "at": "2026-09-28T00:45:14Z",
+    "via": "Claude Code",
+    "note": "Sistema inicial: color primario nogal tomado del logotipo en Instagram; paleta, tipografía, 7 componentes y portada."
+  }
+}

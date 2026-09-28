@@ -1,0 +1,14 @@
+<!-- @dsCard group="Contenido" height=380 -->
+<!doctype html>
+<html><head><meta charset="utf-8"><title>ServiceCard</title></head>
+<body><div id="root" class="nar-row" style="align-items: stretch"></div>
+<script>
+  var N = window.NAR, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+    h(N.ServiceCard, { icon: 'car', area: 'Tránsito', title: 'Trámites de tránsito',
+      items: ['Comparendos', 'Multas y acuerdos de pago', 'Suspensión o cancelación de licencia', 'Embargos vehiculares'],
+      footer: h(N.Button, { variant: 'quiet', icon: 'arrow-right' }, 'Escríbenos') }),
+    h(N.ServiceCard, { icon: 'file-badge', area: 'Trámites', title: 'Certificados',
+      items: ['Libertad y tradición', 'Catastral', 'RUNT y RUT', 'REDAM y antecedentes'],
+      footer: h(N.Tag, { tone: 'tinta' }, 'Entrega oportuna') })));
+</script></body></html>

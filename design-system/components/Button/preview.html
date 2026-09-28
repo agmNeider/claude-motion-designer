@@ -1,0 +1,12 @@
+<!-- @dsCard group="Acciones" height=88 -->
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Button</title></head>
+<body><div id="root" class="nar-row"></div>
+<script>
+  var N = window.NAR, h = React.createElement;
+  ReactDOM.createRoot(document.getElementById('root')).render(h(React.Fragment, null,
+    h(N.Button, { variant: 'primary', icon: 'arrow-right' }, 'Agenda tu consulta'),
+    h(N.Button, { variant: 'secondary' }, 'Ver servicios'),
+    h(N.Button, { variant: 'quiet' }, 'Cómo llegar'),
+    h(N.Button, { variant: 'primary', disabled: true }, 'Enviando…')));
+</script></body></html>
