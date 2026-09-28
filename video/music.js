@@ -1,6 +1,6 @@
 /*
  * Original score for the N.A.R. video, synthesized sample by sample from timeline.js.
- * Cinematic-corporate, 120 BPM, D major. No samples, no third-party audio.
+ * Cinematic-corporate, 120 BPM, D major, 40 s. No samples, no third-party audio.
  *
  * Run: node video/music.js [out.wav]
  */
@@ -53,7 +53,7 @@ const CHORDS = {
   G: { bass: 31, pad: [43, 50, 55, 59, 62], arp: [67, 71, 74, 79] },
   Em: { bass: 40, pad: [40, 47, 52, 55, 59], arp: [64, 67, 71, 76] },
 };
-const chordAt = (t) => CHORDS[T.chords[Math.min(15, Math.floor(t / T.BAR))]];
+const chordAt = (t) => CHORDS[T.chords[Math.min(T.chords.length - 1, Math.floor(t / T.BAR))]];
 
 // Kick times → side-chain ducking for pad and bass.
 const kicks = [];
@@ -212,90 +212,100 @@ function reverb(input, roomDelays, wet) {
 }
 
 // ---------------------------------------------------------------- arrangement
-const B = T.BEAT, BAR = T.BAR, bar = T.bar;
+const B = T.BEAT, BAR = T.BAR, bar = T.bar, NB = T.chords.length;
+const groove = (b) => T.grooveBars.indexOf(b) >= 0;
 
-// Kicks first so ducking knows them.
-for (let b = 0; b < 16; b++) {
+// Kicks first so the side-chain knows them.
+for (let b = 0; b < NB; b++) {
   const t0 = bar(b);
   if (b === 1) [0, 1, 2, 3].forEach((k) => kick(t0 + k * B, 0.28)); // heartbeat under the question
   if (b === 3) [0, 2].forEach((k) => kick(t0 + k * B, 0.8));
-  if ((b >= 4 && b <= 9) || b === 13 || b === 14) [0, 1, 2, 3].forEach((k) => kick(t0 + k * B, 0.95));
-  if (b === 10) [0, 2.5].forEach((k) => kick(t0 + k * B, 0.9));
+  if (groove(b)) [0, 1, 2, 3].forEach((k) => kick(t0 + k * B, 0.95));
 }
-kick(bar(15), 1);
+T.slams.forEach((t) => kick(t, 1));
+kick(T.contact.t.final, 1);
+kicks.sort((a, b) => a - b);
 
-// Pads: one chord per bar.
-for (let b = 0; b < 16; b++) {
-  const c = chordAt(bar(b) + 0.01);
-  const last = b === 15;
+// Pads: one chord per bar; filter opens in the intro and the breakdown.
+for (let b = 0; b < NB; b++) {
+  const c = chordAt(bar(b) + 0.01), last = b === NB - 1;
   const t0 = bar(b), t1 = last ? T.DURATION - 0.9 : bar(b + 1);
-  if (b < 2) pad(t0, t1, c.pad, 0.10, 450 + b * 400, 900 + b * 600);
-  else if (b >= 11 && b <= 12) pad(t0, t1, c.pad, 0.13, 900 + (b - 11) * 1500, 2400 + (b - 11) * 1800);
+  if (b < 2) pad(t0, t1, c.pad, 0.1, 450 + b * 400, 900 + b * 600);
+  else if (b === 15 || b === 16) pad(t0, t1, c.pad, 0.13, 900 + (b - 15) * 1500, 2400 + (b - 15) * 1800);
+  else if (b === 12) pad(t0, t1, c.pad, 0.15, 1200, 3200);
   else pad(t0, t1, c.pad, 0.12, 1900, 2300);
 }
 
 // Bass.
-for (let b = 2; b < 16; b++) {
+for (let b = 2; b < NB; b++) {
   const c = chordAt(bar(b) + 0.01), t0 = bar(b);
   if (b === 2 || b === 3) [0, 1, 2, 3].forEach((k) => bassNote(t0 + k * B, B * 0.9, c.bass, 0.32));
-  else if ((b >= 4 && b <= 10) || b === 13 || b === 14) for (let k = 0; k < 8; k++) bassNote(t0 + k * B / 2 + 0.01, B / 2 * 0.8, c.bass + (k % 4 === 3 ? 12 : 0), 0.3);
-  else if (b === 12) bassNote(t0 + 3 * B, B, c.bass, 0.3);
-  else if (b === 15) bassNote(t0, 1.9, c.bass, 0.4);
+  else if (groove(b)) for (let k = 0; k < 8; k++) bassNote(t0 + (k * B) / 2 + 0.01, (B / 2) * 0.8, c.bass + (k % 4 === 3 ? 12 : 0), 0.3);
+  else if (b === 12) T.slams.forEach((s) => bassNote(s, 0.9, c.bass, 0.42));
+  else if (b === 16) bassNote(t0 + 3 * B, B, c.bass, 0.3);
+  else if (b === NB - 1) bassNote(t0, 1.9, c.bass, 0.4);
 }
 
-// Drums.
-for (let b = 4; b < 15; b++) {
-  if (b >= 11 && b <= 12) continue;
+// Drums in the groove bars.
+for (let b = 0; b < NB; b++) {
+  if (!groove(b)) continue;
   const t0 = bar(b);
-  if (b !== 10) [1, 3].forEach((k) => clap(t0 + k * B));
-  else clap(t0 + 3 * B, 0.8);
-  if (b !== 10) for (let k = 0; k < 4; k++) hat(t0 + k * B + B / 2, 1, k === 3);
-  if (b === 8 || b === 14) for (let k = 0; k < 16; k++) if (k % 2) hat(t0 + k * B / 4, 0.5);
+  [1, 3].forEach((k) => clap(t0 + k * B));
+  for (let k = 0; k < 4; k++) hat(t0 + k * B + B / 2, 1, k === 3);
+  if (b >= 8 && b <= 11) for (let k = 0; k < 16; k++) if (k % 2) hat(t0 + (k * B) / 4, 0.45); // 16ths under the cards
+  if (b === 7 || b === 11) for (let k = 0; k < 4; k++) snare(t0 + 3 * B + (k * B) / 4, 0.35 + k * 0.1); // fills into the next section
 }
-// Snare build into the close: 8ths → 16ths → 32nds across bar 12.
+// Snare build into the close: 8ths → 16ths → 32nds across bar 16.
 {
-  const t0 = bar(12);
-  for (let k = 0; k < 4; k++) snare(t0 + k * B / 2, 0.25 + k * 0.05);
-  for (let k = 0; k < 8; k++) snare(t0 + BAR / 2 + k * B / 4, 0.45 + k * 0.03);
-  for (let k = 0; k < 8; k++) snare(t0 + BAR * 0.75 + k * B / 8, 0.65 + k * 0.03);
+  const t0 = bar(16);
+  for (let k = 0; k < 4; k++) snare(t0 + (k * B) / 2, 0.25 + k * 0.05);
+  for (let k = 0; k < 8; k++) snare(t0 + BAR / 2 + (k * B) / 4, 0.45 + k * 0.03);
+  for (let k = 0; k < 8; k++) snare(t0 + BAR * 0.75 + (k * B) / 8, 0.65 + k * 0.03);
 }
 
-// Arpeggio (16ths).
+// Arpeggio (16ths) wherever the groove or the stamp plays.
 const ARP = [0, 1, 2, 3, 2, 1, 2, 3];
-for (let b = 2; b < 15; b++) {
-  if (b === 11 || b === 12) continue;
-  const c = chordAt(bar(b) + 0.01);
-  const g = b < 4 ? 0.05 : 0.07;
-  for (let k = 0; k < 16; k++) pluck(bar(b) + k * B / 4, c.arp[ARP[k % 8]], g * (k % 4 === 0 ? 1.2 : 0.85), { decay: 9, index: 1.6, pan: k % 2 ? 0.4 : -0.4, send: 0.25 });
+for (let b = 2; b < NB - 1; b++) {
+  if (!(groove(b) || b === 2 || b === 3)) continue;
+  const c = chordAt(bar(b) + 0.01), g = b < 4 ? 0.05 : 0.065;
+  for (let k = 0; k < 16; k++) pluck(bar(b) + (k * B) / 4, c.arp[ARP[k % 8]], g * (k % 4 === 0 ? 1.2 : 0.85), { decay: 9, index: 1.6, pan: k % 2 ? 0.4 : -0.4, send: 0.25 });
 }
 
-// Melodic ticks locked to on-screen text.
+// Melodic hits locked to what appears on screen.
 T.introWords.forEach((w, i) => pluck(w.t, [66, 69, 71][i], 0.2, { decay: 2.5, index: 1.2, send: 0.6 }));
-T.services.forEach((s, i) => T.serviceItemTimes(i).forEach((t, k) => {
+// Branch roll: a rising line, one note per branch, landing on the tonic for "y mucho más."
+const RAMA_NOTES = [74, 76, 78, 79, 81, 83, 85, 86, 88, 90, 91, 93];
+T.ramas.times.forEach((t, i) => { pluck(t, RAMA_NOTES[i], 0.1, { decay: 5, index: 1.3, pan: i % 2 ? 0.3 : -0.3, send: 0.45 }); hat(t, 0.6); });
+pluck(T.ramas.outro.t, 86, 0.16, { decay: 2, index: 1.2, send: 0.7 });
+// Cards: a swish as each flies, a soft tick as it lands.
+T.tramites.times.forEach((t, k) => {
+  whoosh(t + 0.12, 0.05);
   const c = chordAt(t);
-  pluck(t, c.arp[(k + 1) % 4] + 12, 0.07, { decay: 7, index: 0.8, pan: 0.2, send: 0.4 });
-}));
-T.values.forEach((v, i) => pluck(v.t, [78, 81, 83][i], 0.13, { decay: 4, index: 1.1, send: 0.5 }));
-pluck(T.caseLine.t, 74, 0.16, { decay: 1.6, index: 0.9, send: 0.7 });
-// Breakdown piano: a chord under each motto word.
-T.lemaWords.forEach((w) => {
-  const c = chordAt(w.t);
-  c.pad.slice(1).forEach((m, j) => pluck(w.t + j * 0.018, m + 12, 0.07, { decay: 1.1, index: 1.4, pan: -0.3 + j * 0.2, send: 0.7 }));
-  pluck(w.t, c.arp[0], 0.1, { decay: 1.3, index: 1, send: 0.7 });
+  pluck(t + 0.36, c.arp[k % 4] + 12, 0.07, { decay: 7, index: 0.8, pan: k % 2 ? 0.35 : -0.35, send: 0.35 });
 });
-// Close: sparkle on each contact element.
-Object.entries(T.contact.t).forEach(([k, t], i) => { if (k !== "fade" && k !== "logo") pluck(t, [81, 86, 90, 93][i % 4], 0.1, { decay: 3, index: 1, send: 0.6 }); });
-// Final chord hit.
-chordAt(bar(15) + 0.01).pad.forEach((m, j) => pluck(bar(15) + j * 0.012, m + 12, 0.08, { decay: 0.7, index: 1.6, pan: -0.4 + j * 0.2, send: 0.8 }));
+// The drop: a chord stab on each slam.
+T.slams.forEach((t) => chordAt(t).pad.forEach((m, j) => pluck(t + j * 0.01, m + 12, 0.07, { decay: 1.4, index: 2, pan: -0.4 + j * 0.2, send: 0.8 })));
+T.valores.forEach((v, i) => pluck(v.t, [78, 81, 83][i], 0.13, { decay: 4, index: 1.1, send: 0.5 }));
+// Breakdown piano under each line of the motto, then a second chord on beat 3.
+T.lema.forEach((l) => [0, 2].forEach((bt) => {
+  const t = l.t + bt * B, c = chordAt(t);
+  c.pad.slice(1).forEach((m, j) => pluck(t + j * 0.018, m + 12, 0.07, { decay: 1.1, index: 1.4, pan: -0.3 + j * 0.2, send: 0.7 }));
+  pluck(t, c.arp[bt ? 2 : 0], 0.1, { decay: 1.3, index: 1, send: 0.7 });
+}));
+// Close: sparkle on each contact element, final chord.
+["cta", "phones", "address", "handle"].forEach((k, i) => pluck(T.contact.t[k], [81, 86, 90, 93][i], 0.1, { decay: 3, index: 1, send: 0.6 }));
+chordAt(T.contact.t.final + 0.01).pad.forEach((m, j) => pluck(T.contact.t.final + j * 0.012, m + 12, 0.08, { decay: 0.7, index: 1.6, pan: -0.4 + j * 0.2, send: 0.8 }));
 
 // FX.
 sweep(bar(1), bar(2), { gain: 0.13 });
 sweep(bar(1, 2), bar(2), { reverse: true, f0: 3000, f1: 9000, gain: 0.18 });
-sweep(bar(12), bar(13), { gain: 0.15 });
-sweep(bar(12, 2), bar(13), { reverse: true, f0: 3000, f1: 9000, gain: 0.2 });
+sweep(bar(11, 2), bar(12), { gain: 0.12 });
+sweep(bar(16), bar(17), { gain: 0.15 });
+sweep(bar(16, 2), bar(17), { reverse: true, f0: 3000, f1: 9000, gain: 0.2 });
 T.hits.forEach((t) => impact(t, 1));
-impact(bar(15), 0.55);
-T.wipes.forEach((t) => whoosh(t, 0.13));
+T.slams.forEach((t) => impact(t, 0.6));
+impact(T.contact.t.final, 0.5);
+T.whooshes.forEach((t) => whoosh(t, 0.13));
 
 // ---------------------------------------------------------------- mix
 const rvL = reverb(SEND, [1557, 1617, 1491, 1422, 1277, 1356], 1);

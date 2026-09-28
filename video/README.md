@@ -1,10 +1,10 @@
 # Video · N.A.R. Abogados & Asociados
 
-Motion-design video (1080×1920, 30 fps, 32 s) with an original score, both generated with JavaScript from one shared beat grid.
+Motion-design video (1080×1920, 30 fps, 40 s) with an original score, both generated with JavaScript from one shared beat grid.
 
 | File | What |
 | --- | --- |
-| `timeline.js` | 120 BPM grid, scenes, on-screen copy, hit and transition times. Picture and music both read it. |
+| `timeline.js` | 120 BPM grid (20 bars), scenes, transitions, on-screen copy (branches of law, cases, contact), hit times. Picture and music both read it. |
 | `scene.js` | Canvas renderer: `drawFrame(t)` paints any instant deterministically. |
 | `music.js` | Synthesizes `out/musica.wav` (pad, bass, arpeggio, drums, risers, impacts, reverb). |
 | `render.js` | Captures every frame in headless Chromium and muxes H.264 + AAC with ffmpeg. |

@@ -1,8 +1,8 @@
 /*
  * Shared timeline for the N.A.R. video. Both the picture (scene.js) and the music (music.js)
- * read these numbers, so every cut, hit and word lands on the same beat.
+ * read these numbers, so every cut, hit, card and word lands on the same beat.
  *
- * 120 BPM → 1 beat = 0.5 s, 1 bar (4/4) = 2 s. 16 bars = 32 s.
+ * 120 BPM → 1 beat = 0.5 s, 1 bar (4/4) = 2 s. 20 bars = 40 s.
  */
 (function (root, factory) {
   if (typeof module === "object" && module.exports) module.exports = factory();
@@ -12,71 +12,109 @@
   var BEAT = 60 / BPM;
   var BAR = BEAT * 4;
   var bar = function (n, beat) { return n * BAR + (beat || 0) * BEAT; };
-
-  var services = [
-    { icon: "users", area: "Derecho de familia", title: ["Familia"], items: ["Cuota alimentaria", "Divorcio", "Separación de cuerpos", "Sociedad conyugal"] },
-    { icon: "car", area: "Tránsito", title: ["Trámites de", "tránsito"], items: ["Comparendos", "Multas y acuerdos de pago", "Licencias de conducción", "Embargos vehiculares"] },
-    { icon: "file-text", area: "Documentos", title: ["Elaboración de", "documentos"], items: ["Derechos de petición", "Tutelas", "Contratos", "Poderes y autorizaciones"] },
-    { icon: "file-badge", area: "Trámites", title: ["Certificados"], items: ["Libertad y tradición", "RUNT · RUT", "REDAM", "Antecedentes"] },
-    { icon: "scale", area: "Asesoría", title: ["Asesoría", "jurídica"], items: ["Acompañamiento legal", "en cada paso del proceso"] },
-  ];
+  var range = function (n) { var a = []; for (var i = 0; i < n; i++) a.push(i); return a; };
 
   var scenes = {
-    intro: { start: 0, end: bar(2) },            // bars 0–1: question + rings drawing, riser
-    stamp: { start: bar(2), end: bar(4) },       // bars 2–3: the seal stamps on the downbeat, name, location
-    services: { start: bar(4), end: bar(9) },    // bars 4–8: five services, one bar each
-    values: { start: bar(9), end: bar(11) },     // bars 9–10: three values, then "Cada caso es diferente."
-    lema: { start: bar(11), end: bar(13) },      // bars 11–12: breakdown, the motto word by word
-    close: { start: bar(13), end: bar(16) },     // bars 13–15: impact, logo, contact, final chord
+    intro: { start: 0, end: bar(2) },          // bars 0–1   question, letters imploding into the seal
+    stamp: { start: bar(2), end: bar(4) },     // bars 2–3   the seal stamps, name, location
+    ramas: { start: bar(4), end: bar(8) },     // bars 4–7   every branch of law, slot-machine roll
+    tramites: { start: bar(8), end: bar(12) }, // bars 8–11  wall of cases and paperwork, cards flying in
+    frase: { start: bar(12), end: bar(13) },   // bar 12     "Cualquier caso. Un solo equipo." (drop)
+    valores: { start: bar(13), end: bar(15) }, // bars 13–14 three reasons
+    lema: { start: bar(15), end: bar(17) },    // bars 15–16 breakdown, the motto letter by letter
+    cierre: { start: bar(17), end: bar(20) },  // bars 17–19 impact, logo, call to action, contact
   };
 
-  // Words of the intro question, one per beat.
+  // How each scene hands over to the next (at the next scene's start).
+  var transitions = [
+    { t: bar(2), type: "hit" },
+    { t: bar(4), type: "iris" },
+    { t: bar(8), type: "slices" },
+    { t: bar(12), type: "slam" },
+    { t: bar(13), type: "wipe" },
+    { t: bar(15), type: "fade" },
+    { t: bar(17), type: "hit" },
+  ];
+
   var introWords = [
     { text: "¿Necesitas", t: bar(0, 1) },
     { text: "asesoría", t: bar(0, 2) },
     { text: "legal?", t: bar(0, 3) },
   ];
 
-  var values = [
-    { icon: "shield-check", text: "Asesoría personalizada", t: bar(9, 0) },
-    { icon: "handshake", text: "Gestión eficiente y oportuna", t: bar(9, 1) },
-    { icon: "scale", text: "Experiencia en el sector", t: bar(9, 2) },
+  // ---- Ramas: headline, then one branch per beat.
+  var ramas = {
+    headline: bar(4),
+    dock: bar(4, 2),
+    list: ["Civil", "Penal", "de Familia", "Laboral", "Administrativo", "Comercial", "Constitucional",
+      "de Tránsito", "Seguridad social", "Agrario", "Notarial", "Disciplinario"],
+    rollStart: bar(4, 3),
+    outro: { text: "y mucho más.", t: bar(7, 2) },
+  };
+  ramas.times = ramas.list.map(function (_, i) { return ramas.rollStart + i * BEAT; });
+
+  // ---- Trámites: 12 cards, one per beat.
+  var tramites = {
+    headline: bar(8),
+    cards: [
+      { icon: "gavel", text: "Demandas" },
+      { icon: "shield-check", text: "Tutelas" },
+      { icon: "file-text", text: "Derechos de petición" },
+      { icon: "file-pen-line", text: "Contratos" },
+      { icon: "users", text: "Divorcios" },
+      { icon: "house", text: "Sucesiones" },
+      { icon: "baby", text: "Cuota alimentaria" },
+      { icon: "hourglass", text: "Pensiones" },
+      { icon: "banknote", text: "Cobro de cartera" },
+      { icon: "heart-handshake", text: "Conciliaciones" },
+      { icon: "shield", text: "Defensa penal" },
+      { icon: "car", text: "Comparendos" },
+    ],
+    firstCard: bar(8, 2),
+    exit: bar(11, 2),
+  };
+  tramites.times = tramites.cards.map(function (_, i) { return tramites.firstCard + i * BEAT; });
+
+  var frase = [
+    { text: "Cualquier caso.", t: bar(12, 0) },
+    { text: "Un solo equipo.", t: bar(12, 2) },
   ];
-  var caseLine = { text: "Cada caso es diferente.", t: bar(10, 0) };
 
-  var lemaWords = [
-    { text: "Tu", t: bar(11, 0), line: 0 },
-    { text: "tranquilidad,", t: bar(11, 1), line: 0 },
-    { text: "nuestra", t: bar(12, 0), line: 1 },
-    { text: "prioridad.", t: bar(12, 1), line: 1 },
+  var valores = [
+    { icon: "shield-check", text: "Asesoría personalizada", t: bar(13, 0) },
+    { icon: "handshake", text: "Gestión eficiente y oportuna", t: bar(13, 2) },
+    { icon: "scale", text: "Experiencia en el sector", t: bar(14, 0) },
   ];
 
-  // Hits: big moments with an impact in the music and a flash/shake in the picture.
-  var hits = [bar(2), bar(13)];
-  // Transitions (diagonal wipe + whoosh): one per service change and into values.
-  var wipes = [bar(4), bar(5), bar(6), bar(7), bar(8), bar(9)];
-  // Service items appear on eighth notes after beat 1 of their bar.
-  function serviceItemTimes(i) {
-    var s = bar(4 + i);
-    return services[i].items.map(function (_, k) { return s + BEAT * 1 + k * (BEAT / 2); });
-  }
-
-  // Chord per bar (drives pad, bass, arp). 16 bars.
-  var chords = ["Bm", "A", "D", "A", "D", "Bm", "G", "A", "D", "Bm", "Em", "G", "A", "D", "G", "D"];
+  var lema = [
+    { text: "Tu tranquilidad,", t: bar(15, 0) },
+    { text: "nuestra prioridad.", t: bar(16, 0) },
+  ];
 
   var contact = {
     phones: ["313 699 4178", "304 382 3723", "304 382 3717", "301 466 6391"],
     address: "Sincé, Sucre · frente al D1",
     handle: "@nar.abogadosyasociados",
     cta: "Agenda tu consulta",
-    t: { logo: bar(13), cta: bar(14), phones: bar(14, 1), address: bar(14, 3), handle: bar(15), fade: bar(15, 3) },
+    t: { logo: bar(17), cta: bar(18), phones: bar(18, 1), address: bar(18, 3), handle: bar(19), final: bar(19), fade: bar(19, 3) },
   };
 
+  // Big hits: impact in the music, flash + shake in the picture.
+  var hits = [bar(2), bar(17)];
+  var slams = frase.map(function (f) { return f.t; });
+  var whooshes = [bar(4), bar(8), bar(13), ramas.dock, tramites.exit];
+
+  // Chord per bar (pad, bass, arpeggio). 20 bars.
+  var chords = ["Bm", "A", "D", "A", "D", "Bm", "G", "A", "D", "Bm", "G", "A", "Bm", "G", "A", "G", "A", "D", "G", "D"];
+  // Where the full groove plays (kick on every beat).
+  var grooveBars = [4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 17, 18];
+
   return {
-    BPM: BPM, BEAT: BEAT, BAR: BAR, bar: bar,
-    DURATION: bar(16), FPS: 30, WIDTH: 1080, HEIGHT: 1920,
-    scenes: scenes, services: services, introWords: introWords, values: values, caseLine: caseLine,
-    lemaWords: lemaWords, hits: hits, wipes: wipes, serviceItemTimes: serviceItemTimes, chords: chords, contact: contact,
+    BPM: BPM, BEAT: BEAT, BAR: BAR, bar: bar, range: range,
+    DURATION: bar(20), FPS: 30, WIDTH: 1080, HEIGHT: 1920,
+    scenes: scenes, transitions: transitions, introWords: introWords, ramas: ramas, tramites: tramites,
+    frase: frase, valores: valores, lema: lema, contact: contact,
+    hits: hits, slams: slams, whooshes: whooshes, chords: chords, grooveBars: grooveBars,
     location: { text: "Sincé, Sucre", sub: "Frente al D1", t: bar(3) },
   };
 });

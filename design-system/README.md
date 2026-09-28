@@ -15,13 +15,11 @@ Lema: *Tu tranquilidad, nuestra prioridad.*
 
 ## Servicios (inventario para piezas y video)
 
-| Área | Ícono | Subservicios |
-| --- | --- | --- |
-| Derecho de familia | `users` | Cuota alimentaria, divorcio (mutuo acuerdo o contencioso), separación de cuerpos, liquidación de sociedad conyugal |
-| Trámites de tránsito | `car` | Comparendos, multas y acuerdos de pago, sanciones, suspensión o cancelación de licencia, embargos vehiculares |
-| Elaboración de documentos | `file-text` | Derechos de petición, tutelas, contratos, poderes y autorizaciones, solicitudes y reclamaciones |
-| Certificados y trámites | `file-badge` | Libertad y tradición, catastral, RUNT, RUT, REDAM, antecedentes |
-| Asesoría jurídica | `scale` | Asesoría y acompañamiento legal |
+La firma trabaja en todas las ramas del derecho y asume cualquier trámite. Al comunicarlo, di "todas las ramas del derecho" y "todo tipo de trámites" y ejemplifica con estas listas; no las presentes como cerradas.
+
+- Ramas: civil, penal, de familia, laboral, administrativo, comercial, constitucional, de tránsito, seguridad social, agrario, notarial y disciplinario.
+- Trámites frecuentes (ícono entre paréntesis): demandas (`gavel`), tutelas (`shield-check`), derechos de petición (`file-text`), contratos, divorcios (`users`), sucesiones, cuota alimentaria, pensiones, cobro de cartera, conciliaciones, defensa penal, comparendos (`car`), certificados (libertad y tradición, RUNT, RUT, REDAM, antecedentes; `file-badge`), poderes y autorizaciones.
+- Frase de marca para este mensaje: "Cualquier caso. Un solo equipo."
 
 Diferenciales que la firma declara: asesoría personalizada (`shield-check`), gestión eficiente y oportuna (`handshake`), experiencia en el sector (`scale`).
 
